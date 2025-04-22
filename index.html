@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scroll Video Experience</title>
+  <style>
+    {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #0e0e0e;
+      color: #f5f5f5;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      padding: 60px 20px 20px;
+      text-align: center;
+      background: #111;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #00ffd0;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #aaa;
+      font-size: 1.2rem;
+    }
+
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    video {
+      width: 90%;
+      max-width: 960px;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 255, 200, 0.2);
+      background-color: #000;
+    }
+
+    .spacer {
+      height: 100vh;
+      background: linear-gradient(145deg, #141414, #1e1e1e);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .spacer p {
+      font-size: 1.8rem;
+      color: #888;
+      max-width: 600px;
+      padding: 0 20px;
+    }
+
+    footer {
+      padding: 30px 20px;
+      background: #111;
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      .spacer p {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Scroll Video Experience</h1>
+    <p>Watch the second video autoplay as you scroll down</p>
+  </header>
+  
+  <div class="video-wrapper">
+    <video controls poster="poster1.jpg">
+      <source src="lv_7456742205793914165_20250309124231.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="spacer">
+    <p>Keep scrolling — the next video will autoplay when it becomes visible on your screen.</p>
+  </div>
+  <div class="video-wrapper">
+    <video id="scrollVideo" playsinline poster="poster2.jpg">
+      <source src="c3418380b75c5ac0e8341fc0b58b3dc8.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  
+  <footer>
+    &copy; 2025 Smooth Scroll Video. Built with HTML, CSS & JavaScript.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const scrollVideo = document.getElementById('scrollVideo');
+
+      if (scrollVideo) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              scrollVideo.play();
+            } else {
+              scrollVideo.pause();
+            }
+          });
+        }, { threshold: 0.6 });
+
+        observer.observe(scrollVideo);
+      }
+    });
+  </script>
+
+</body>
+</html>
